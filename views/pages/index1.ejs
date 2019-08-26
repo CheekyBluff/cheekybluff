@@ -3,23 +3,30 @@
 <head> 
 	<meta charset="utf-8" />
 	<title>Poker Game WIP</title>
+
 	<style> 
 		* { padding: 0; margin: 0; }
 		canvas {background: #eee; display: block; margin: 0 auto;}
 	</style>
 </head>
 <body>
-	<h1 align="center">Header1</h1>
+	<a href="http://localhost:5000/cool">Cool</a>
+	<h2 align="center">Header1</h2>
 
 
-<canvas id="myCanvas" width = "480" height = "320"></canvas>
+<canvas id="myCanvas" width = "1280" height = "720"></canvas>
+
 
 <script>
 	var canvas = document.getElementById("myCanvas")
 	var ctx = canvas.getContext("2d");
 	var x = 0;
-	var img = document.getElementById("scream");
-	
+	var img = document.createElement("img");
+
+	var suits = ["C","D","H","S"]
+	var numbers = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
+
+	img.src = numbers[Math.floor(Math.random()*13)]+suits[Math.floor(Math.random()*4)]+".png";
 	function draw(){
 		//drawing code
 		ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -31,7 +38,7 @@
 		ctx.closePath();
 
 
-		ctx.drawImage(img, 10, 10);
+		ctx.drawImage(img, x, 10);
 	}
 	setInterval(draw, 10);
 </script>
