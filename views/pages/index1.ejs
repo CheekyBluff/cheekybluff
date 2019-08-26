@@ -33,7 +33,7 @@
 </head>
 <body>
 	<a href="http://localhost:5000/cool">Cool</a>
-	<h2 align="center">Header1</h2>
+	<h2 align="center">Cheeky Bluffers</h2>
 	
 
 <canvas id="myCanvas" width = "1280" height = "720"></canvas>
@@ -41,25 +41,42 @@
 <div><button class = "button deal" onclick="deal()">Deal cards</button></div>
 
 <script>
+	var showCards = true;
 	var canvas = document.getElementById("myCanvas")
 	var ctx = canvas.getContext("2d");
-	var x = 0;
-	var img = document.createElement("img");
+	var cards = [document.createElement("img"), document.createElement("img")];
 	var table = document.createElement("img");
+	var btn = document.createElement("img");
 	var suits = ["C","D","H","S"]
 	var numbers = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
 
-	img.src = numbers[Math.floor(Math.random()*13)]+suits[Math.floor(Math.random()*4)]+".png";
+	btn.src = "DealerChip.png";
+	cards[0].src = numbers[Math.floor(Math.random()*13)]+suits[Math.floor(Math.random()*4)]+".png";
+	cards[1].src = numbers[Math.floor(Math.random()*13)]+suits[Math.floor(Math.random()*4)]+".png";
 	table.src = "poker_table.png";
 	function draw(){
 		//drawing code
 		ctx.clearRect(0,0,canvas.width,canvas.height);
-		ctx.drawImage(table, 0, 0, canvas.width, canvas.height);
-		ctx.drawImage(img, x, 10, 173, 264);
+		//draws poker table
+		ctx.drawImage(table, 100, 50, canvas.width-200, canvas.height-180);
+		draw_dealer_chip();
+		draw_cards(575, 50)
 	}
 
 	function deal(){
-		img.src = numbers[Math.floor(Math.random()*13)]+suits[Math.floor(Math.random()*4)]+".png";
+		cards[0].src = numbers[Math.floor(Math.random()*13)]+suits[Math.floor(Math.random()*4)]+".png";
+		cards[1].src = numbers[Math.floor(Math.random()*13)]+suits[Math.floor(Math.random()*4)]+".png";
+	}
+
+	function draw_cards(x, offset){
+		for(i = 0; i < cards.length; i++){ 
+			//document.write(i);
+			ctx.drawImage(cards[i], x+offset*i, 500, 86, 132);
+		}
+	}
+
+	function draw_dealer_chip(){
+		ctx.drawImage(btn, canvas.width/2-25, 420, 50, 50);
 	}
 
 	setInterval(draw, 10);
